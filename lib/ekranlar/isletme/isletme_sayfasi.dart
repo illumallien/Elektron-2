@@ -3,6 +3,10 @@ import 'package:ekinoks_elektron/ekranlar/isletme/isletmedetay/%C3%BCr%C3%BCnsay
 import 'package:ekinoks_elektron/ekranlar/kayit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ekinoks_elektron/ekranlar/ayarlar.dart';
+import 'package:ekinoks_elektron/ekranlar/karekod.dart';
+
+var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class IsletmeProfil extends StatelessWidget {
   IsletmeProfil();
@@ -12,6 +16,72 @@ class IsletmeProfil extends StatelessWidget {
     String _surname = "Zuckerberg";
     return SafeArea(
       child: Scaffold(
+        key: scaffoldKey,
+        appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 41, 75, 147),
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                scaffoldKey.currentState!.openDrawer();
+              },
+            )),
+        drawer: Drawer(
+            child: ListView(children: [
+          Container(
+            height: 70,
+            child: const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 41, 75, 147),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Pages"),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.qr_code),
+            title: const Text("QR code scanner"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => KarekodSayfasi()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.map),
+            title: const Text("Map"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HaritaSayfasi()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text("Settings"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AyarlarSayfasi()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text("Sign Out"),
+            onTap: () {
+              auth.signOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Kayitsayfasi()),
+              );
+            },
+          ),
+        ])),
         body: SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),
           child: Column(
