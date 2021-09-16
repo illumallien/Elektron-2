@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
           return ErrorWidget(Error);
         } else if (snapshot.hasData) {
           return MaterialApp(
-            debugShowCheckedModeBanner: false, //home: ProfilSayfasi()
-            home: IsletmeProfil(),
-          );
+              debugShowCheckedModeBanner: false, home: HaritaSayfasi()
+              // home: IsletmeProfil(),
+              );
         } else {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
