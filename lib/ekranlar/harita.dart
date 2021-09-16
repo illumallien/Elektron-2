@@ -10,30 +10,44 @@ class HaritaSayfasi extends StatefulWidget {
 }
 
 class _HaritaSayfasiState extends State<HaritaSayfasi> {
-  Set<Marker> _markers = {
-    Marker(
+  Set<Marker> _markers = {};
+  var mapMarker;
+
+  @override
+  void initState() {
+    super.initState();
+    setCustomMarker();
+  }
+
+  Future<void> setCustomMarker() async {
+    mapMarker = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), "assets/markers/tarihi_marker.png");
+  }
+
+/*
+
+Marker(
         markerId: MarkerId("Id-3"),
         position: LatLng(41.00859070323684, 28.980172176274984),
         infoWindow: InfoWindow(
           title: "The Hagia Sophia Mosque",
         ),
         visible: true),
-  };
+
+*/
 
   void _onMapCreated(GoogleMapController controller) {
-    setState(() async {
+    setState(() {
       _markers.add(
         Marker(
             markerId: MarkerId("Id-1"),
             position: LatLng(41.02569414363595, 28.974166688314174),
-            icon: await BitmapDescriptor.fromAssetImage(
-                ImageConfiguration(size: Size(10, 10)),
-                'assets/markers/tarihi_marker.png'),
+            icon: mapMarker,
             infoWindow: InfoWindow(
               title: "Galata Tower",
             ),
             visible: true),
-      );
+      ); /*
       _markers.add(Marker(
           markerId: MarkerId("Id-2"),
           position: LatLng(41.00540250566176, 28.97681618188754),
@@ -152,7 +166,7 @@ class _HaritaSayfasiState extends State<HaritaSayfasi> {
           infoWindow: InfoWindow(
             title: "Dolmabahçe Palace",
           ),
-          visible: true));
+          visible: true));*/
     });
   }
 
