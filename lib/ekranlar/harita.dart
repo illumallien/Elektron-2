@@ -14,6 +14,7 @@ class _HaritaSayfasiState extends State<HaritaSayfasi> {
   var tarihiMarker;
   var camimarker;
   var trenmarker;
+  var eczmarker;
 
   @override
   void initState() {
@@ -31,6 +32,9 @@ class _HaritaSayfasiState extends State<HaritaSayfasi> {
 
     trenmarker = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(size: Size(10, 10)), "assets/markers/train.png");
+
+    eczmarker = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(10, 10)), "assets/markers/eczane.png");
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -134,6 +138,26 @@ class _HaritaSayfasiState extends State<HaritaSayfasi> {
           ),
           visible: true));
     });
+    _markers.add(
+      Marker(
+          markerId: MarkerId("Id-13"),
+          position: LatLng(41.007118, 28.972157),
+          icon: eczmarker,
+          infoWindow: InfoWindow(
+            title: "Pharmacy",
+          ),
+          visible: true),
+    );
+    _markers.add(
+      Marker(
+          markerId: MarkerId("Id-14"),
+          position: LatLng(41.025266, 28.977352),
+          icon: eczmarker,
+          infoWindow: InfoWindow(
+            title: "Pharmacy",
+          ),
+          visible: true),
+    );
   }
 
   @override
